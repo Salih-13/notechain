@@ -1,0 +1,86 @@
+.home img {
+    margin-top: 40px;
+    width: 2000px;
+    height: 700px;
+  }
+
+  .home{
+    background-color: black;
+    color: white;
+  }
+
+.head{
+    margin-left: 70px;
+}
+
+  .heading {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 100;
+    font-size: larger;
+    position: absolute;
+    top: 60%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+  
+  .intro {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Background color for the intro section */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+  }
+  
+  .intro div {
+    text-align: start;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    flex: 1; /* Allows the cards to take equal width */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for card effect */
+    background-color: rgba(255, 255, 255, 0.1); /* Optional: to make the cards semi-transparent */
+  }
+.intro h2, .intro h5 {
+  margin: 5px 0;
+}
+
+.heading h1, .heading h2, .heading h6 {
+  color: white; /* Font color */
+}
+
+.intro2 h1, .intro2 .disc h2, .intro2 .disc1 h2, .intro2 .disc h4, .intro2 .disc1 h4 {
+  color: white; /* Font color */
+}
+
+
+.buttons {
+    position: absolute;
+    top: 6.4%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+  }
+  
+  .btn {
+    background-color:white;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    color: black;
+  }
+  
+  .btn.clicked {
+    background-color: green;
+  }
+  
+  .btn:hover {
+    background-color: lightblue;
+  }

@@ -1,0 +1,76 @@
+/* css/addcontent.css */
+
+.addd {
+    background-color: black;
+    height:1000px;
+}
+.addd.notes {
+    color: white; /* Font color for headings */
+   
+  }
+
+  .addd img{
+     height: 700px;
+    width: 750px; 
+ }
+
+ .image{
+    margin-left: 50%;
+    margin-top: -30%;
+ }
+  
+ 
+  .add.notes h1 {
+    font-size: 50px;; /* Larger font size for h1 */
+  }
+  
+  .title h4{
+    font-size: 30px;
+    margin-left: 20px;
+  }
+  .title input[type='text'] {
+    width: 500px;
+    height: 30px;
+    padding: 5px;
+    font-size: 16px; /* Larger font size for input text */
+    background-color: white;
+    
+    margin-left: 20px;
+    color: black;
+  }
+  
+  .description h4{
+    font-size: 30px;
+    margin-left: 20px;
+  }
+  .description input[type='text'] {
+    width: 500px;
+    height: 200px;
+    padding: 5px;
+    font-size: 16px; /* Larger font size for input text */
+    background-color: balck;
+    color: rgb(5, 5, 5);
+    margin-left: 20px;
+  }
+  
+  .upload {
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+
+  .upload h4{
+    font-size: 30px;
+  }
+  
+  .upload-button button {
+    padding: 10px;
+    background-color: #007bff; /* Blue color */
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .upload-button button:hover {
+    background-color: #28a745; /* Green color on hover */
+  }
+  
