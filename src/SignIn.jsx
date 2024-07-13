@@ -1,11 +1,13 @@
-// SignInForm.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Web3 from 'web3';
+import { useNavigate } from 'react-router-dom';
+import './signin.css';
 
 const SignInForm = () => {
   const [web3, setWeb3] = useState(null);
   const [accounts, setAccounts] = useState([]);
   const [walletId, setWalletId] = useState('');
+  const navigate = useNavigate();
 
   const connectToMetaMask = async () => {
     if (typeof window.ethereum !== 'undefined') {
@@ -19,7 +21,7 @@ const SignInForm = () => {
         const accounts = await web3Instance.eth.getAccounts();
         setAccounts(accounts);
 
-        // Set wallet ID
+        // Set wallet ID and redirect
         if (accounts.length > 0) {
           setWalletId(accounts[0]);
         }
@@ -31,14 +33,29 @@ const SignInForm = () => {
     }
   };
 
+  useEffect(() => {
+    if (walletId) {
+      // Redirect to home page after successful sign-in
+      navigate('/user');
+    }
+  }, [walletId, navigate]);
+
   return (
-    <div>
-      <h2>Sign In with MetaMask</h2>
+    <div className='sign'>
+    <div className="sign-in-container">
+      <h2 className="sign-in-title">Sign In with MetaMask</h2>
       {walletId ? (
-        <p>Connected with account: {walletId}</p>
+        <div className="wallet-info">
+          <p className="wallet-id">Connected with account: {walletId}</p>
+        </div>
       ) : (
-        <button onClick={connectToMetaMask}>Sign In with MetaMask</button>
+        <div className="sign-in-button-container">
+          <button className="sign-in-button" onClick={connectToMetaMask}>
+            Sign In with MetaMask
+          </button>
+        </div>
       )}
+    </div>
     </div>
   );
 };

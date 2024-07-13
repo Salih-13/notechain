@@ -1,0 +1,53 @@
+/* signin.css */
+
+.sign {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .sign-in-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 370px;
+    text-align: center;
+  }
+  
+  .sign-in-title {
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .sign-in-button-container {
+    margin-top: 1rem;
+  }
+  
+  .sign-in-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+  }
+  
+  .sign-in-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .wallet-info {
+    margin-top: 1rem;
+  }
+  
+  .wallet-id {
+    color: #555;
+  }
