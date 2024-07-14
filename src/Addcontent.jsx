@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'; // Make sure axios is installed: npm install axios
+import { pinFileToIPFS } from './pinata.js'; // Import your Pinata utility function
 import './addcontent.css';
 
 const Addcontent = () => {
@@ -12,30 +13,46 @@ const Addcontent = () => {
     console.log('Selected file:', event.target.files[0]);
   };
 
-  const handleUpload = () => {
-    const formData = new FormData();
-    formData.append('file', selectedFile);
-    formData.append('title', title);
-    formData.append('description', description);
+  const handleUpload = async () => {
+    if (!selectedFile) {
+      console.error('No file selected');
+      return;
+    }
 
-    axios.post('http://your-backend-url/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
+    try {
+
+      const options = {
+        pinataMetadata: {
+            name: selectedFile.name,
+            keyvalues: {
+              title,
+              description
+            }
+        },
+        pinataOptions: {
+            cidVersion: 0
+        }
       }
-    }).then(response => {
-      console.log('Upload successful:', response.data);
+
+      const result = await pinFileToIPFS(selectedFile, options);
+      console.log('Upload successful:', result.IpfsHash);
+
+      // insert to blockchain
+
+
       // Optionally, handle success actions like showing a success message or redirecting
-    }).catch(error => {
+    //   window.location.reload(); // Refresh the page after successful upload
+    } catch (error) {
       console.error('Upload error:', error);
       // Handle error scenarios
-    });
+    }
   };
 
   return (
     <div>
       <div className='addd notes'>
         <h1>Share your notes</h1>
-       
+
         <div className='title'>
           <h4>Title</h4>
           <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -53,9 +70,9 @@ const Addcontent = () => {
               onChange={handleFileChange}
               style={{ display: 'none' }}
             />
-            <button>Select PDF</button>
+            Select PDF
           </label>
-          <button onClick={handleUpload}>Upload to Database</button>
+          <button onClick={handleUpload}>Upload to Pinata</button>
         </div>
         <div className='image'>
           <img src='./sapiens.png' alt='placeholder' />
