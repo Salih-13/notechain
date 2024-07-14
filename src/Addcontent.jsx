@@ -7,6 +7,7 @@ const Addcontent = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [uploadSuccess, setUploadSuccess] = useState(false);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -20,28 +21,54 @@ const Addcontent = () => {
     }
 
     try {
+      // Create a text file with the title and description
+      const textFileContent = `Title: ${title}\nDescription: ${description}`;
+      const textFile = new Blob([textFileContent], { type: 'text/plain' });
+      const textFileName = 'metadata.txt';
+      const textFileWithMetadata = new File([textFile], textFileName, { type: 'text/plain' });
 
-      const options = {
+      // Upload the text file to Pinata
+      const textFileOptions = {
         pinataMetadata: {
-            name: selectedFile.name,
-            keyvalues: {
-              title,
-              description
-            }
+          name: textFileName,
+          keyvalues: {
+            title,
+            description,
+          },
         },
         pinataOptions: {
-            cidVersion: 0
-        }
-      }
+          cidVersion: 0,
+        },
+      };
 
-      const result = await pinFileToIPFS(selectedFile, options);
-      console.log('Upload successful:', result.IpfsHash);
+      const textFileResult = await pinFileToIPFS(textFileWithMetadata, textFileOptions);
+      console.log('Text file upload successful:', textFileResult.data.IpfsHash);
 
-      // insert to blockchain
+      // Upload the selected PDF file to Pinata
+      const pdfFileOptions = {
+        pinataMetadata: {
+          name: selectedFile.name,
+          keyvalues: {
+            title,
+            description,
+          },
+        },
+        pinataOptions: {
+          cidVersion: 0,
+        },
+      };
 
+      const pdfFileResult = await pinFileToIPFS(selectedFile, pdfFileOptions);
+      console.log('PDF upload successful:', pdfFileResult.data.IpfsHash);
 
-      // Optionally, handle success actions like showing a success message or redirecting
-    //   window.location.reload(); // Refresh the page after successful upload
+      // Set upload success to true
+      setUploadSuccess(true);
+
+      // Optionally refresh the page after a brief delay
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000); // 3-second delay
+
     } catch (error) {
       console.error('Upload error:', error);
       // Handle error scenarios
@@ -77,6 +104,7 @@ const Addcontent = () => {
         <div className='image'>
           <img src='./sapiens.png' alt='placeholder' />
         </div>
+        {uploadSuccess && <div className='success-message'>Upload successful! The page will refresh shortly...</div>}
       </div>
     </div>
   );

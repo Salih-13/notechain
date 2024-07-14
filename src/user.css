@@ -1,11 +1,67 @@
-.main{
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
     background-color: black;
+    color: white;
+  }
+  
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    height: 100vh;
+    background-color: rgb(8, 8, 8);
     color: white;
     font-size: 35px;
     font-family: 'Times New Roman', Times, serif;
-    height: 1000px;
-}
-
-.user{
-    
-}
+  }
+  
+  .user {
+    margin-bottom: 30px;
+    align-self: flex-start;
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .view, .create {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #79627e;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: 150px;
+    height: 150px;
+    box-shadow: 0 4px 8px rgba(248, 1, 215, 0.432);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .view:hover, .create:hover {
+    box-shadow: 0 8px 16px rgba(182, 4, 236, 0.2);
+  }
+  
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  h2 {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .view svg, .create svg {
+    font-size: 48px;
+    color: #333;
+  }
+  
