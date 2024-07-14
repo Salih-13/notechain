@@ -9,6 +9,7 @@ const Addcontent = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [uploadSuccess, setUploadSuccess] = useState(false);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -22,42 +23,54 @@ const Addcontent = () => {
     }
 
     try {
+      // Create a text file with the title and description
+      const textFileContent = `Title: ${title}\nDescription: ${description}`;
+      const textFile = new Blob([textFileContent], { type: 'text/plain' });
+      const textFileName = 'metadata.txt';
+      const textFileWithMetadata = new File([textFile], textFileName, { type: 'text/plain' });
 
-      const options = {
+      // Upload the text file to Pinata
+      const textFileOptions = {
         pinataMetadata: {
-            name: selectedFile.name,
-            keyvalues: {
-              title,
-              description
-            }
+          name: textFileName,
+          keyvalues: {
+            title,
+            description,
+          },
         },
         pinataOptions: {
-            cidVersion: 0
-        }
-      }
+          cidVersion: 0,
+        },
+      };
 
-      const result = await pinFileToIPFS(selectedFile, options);
-      console.log('Upload successful:', result.IpfsHash);
+      const textFileResult = await pinFileToIPFS(textFileWithMetadata, textFileOptions);
+      console.log('Text file upload successful:', textFileResult.data.IpfsHash);
 
-      // 0xf80A9CCB16b6A0ED5dbA43EAC4F1D6FBF76f8067
-      // const contractAddress = "0xf80A9CCB16b6A0ED5dbA43EAC4F1D6FBF76f8067";
-      // const provider = new ethers.providers.Web3Provider(window.ethereum)
+      // Upload the selected PDF file to Pinata
+      const pdfFileOptions = {
+        pinataMetadata: {
+          name: selectedFile.name,
+          keyvalues: {
+            title,
+            description,
+          },
+        },
+        pinataOptions: {
+          cidVersion: 0,
+        },
+      };
 
-      // const signer = provider.getSigner()
+      const pdfFileResult = await pinFileToIPFS(selectedFile, pdfFileOptions);
+      console.log('PDF upload successful:', pdfFileResult.data.IpfsHash);
 
-      // const contract = new ethers.Contract(contractAddress, contractAbi, signer)
+      // Set upload success to true
+      setUploadSuccess(true);
 
-      // const addPoints = await contract.addPoints('0xCb4d53978E9B7b56f2f72eca552e333f891D59C6', 10)
+      // Optionally refresh the page after a brief delay
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000); // 3-second delay
 
-      // const receipt = await addPoints.wait()
-
-      // console.log(receipt)
-
-      // insert to blockchain
-
-
-      // Optionally, handle success actions like showing a success message or redirecting
-    //   window.location.reload(); // Refresh the page after successful upload
     } catch (error) {
       console.error('Upload error:', error);
       // Handle error scenarios
@@ -93,6 +106,7 @@ const Addcontent = () => {
         <div className='image'>
           <img src='./sapiens.png' alt='placeholder' />
         </div>
+        {uploadSuccess && <div className='success-message'>Upload successful! The page will refresh shortly...</div>}
       </div>
     </div>
   );

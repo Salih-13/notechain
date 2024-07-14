@@ -23,6 +23,17 @@
     transform: translate(-50%, -50%);
     color: white;
   }
+
+  .heading h1{
+    font-size: larger;
+    margin-left: 0px;
+  }
+
+  .head2{
+    margin-left: -5 5%;
+    margin-top: 10%;
+    
+  }
   
   .intro {
     display: flex;
@@ -58,8 +69,8 @@
 
 .buttons {
     position: absolute;
-    top: 6.4%;
-    left: 85%;
+    top: 70%;
+    left: 75%;
     transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;

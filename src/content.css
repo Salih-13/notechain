@@ -1,0 +1,39 @@
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    height: 1000px;
+    color: black;
+    font-size: large;
+    font-weight: bold;
+  }
+  
+  .file-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .file-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .file-info {
+    flex: 3;
+  }
+  
+  .file-link {
+    flex: 1;
+    text-align: right;
+  }
+  
