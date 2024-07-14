@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios'; // Make sure axios is installed: npm install axios
 import { pinFileToIPFS } from './pinata.js'; // Import your Pinata utility function
 import './addcontent.css';
+// import {ethers} from 'ethers';
+import contractAbi from './abi.json'
 
 const Addcontent = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -36,6 +38,20 @@ const Addcontent = () => {
 
       const result = await pinFileToIPFS(selectedFile, options);
       console.log('Upload successful:', result.IpfsHash);
+
+      // 0xf80A9CCB16b6A0ED5dbA43EAC4F1D6FBF76f8067
+      // const contractAddress = "0xf80A9CCB16b6A0ED5dbA43EAC4F1D6FBF76f8067";
+      // const provider = new ethers.providers.Web3Provider(window.ethereum)
+
+      // const signer = provider.getSigner()
+
+      // const contract = new ethers.Contract(contractAddress, contractAbi, signer)
+
+      // const addPoints = await contract.addPoints('0xCb4d53978E9B7b56f2f72eca552e333f891D59C6', 10)
+
+      // const receipt = await addPoints.wait()
+
+      // console.log(receipt)
 
       // insert to blockchain
 
